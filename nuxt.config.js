@@ -1,6 +1,9 @@
 
 export default {
   mode: 'spa',
+  router: {
+    base: '/click-sixteen/'
+  },
   /*
   ** Headers of the page
   */
