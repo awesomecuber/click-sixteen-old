@@ -2,12 +2,17 @@
   <div id="app">
     <div class="w-screen h-screen bg-blue-200 mx-auto flex flex-col items-center justify-around">
       <div class="text-4xl">
-        Click Sixteen - Current: <b>{{ cur == 17 ? "DONE" : cur }}</b> - time {{ (time / 100).toFixed(2) }}
+        <p v-if="started">
+          Current: <b>{{ cur == 17 ? "DONE" : cur }}</b> - Time {{ (time / 100).toFixed(2) }}s
+        </p>
+        <p v-else>
+          Click Sixteen
+        </p>
       </div>
       <div class="m-5 flex-1 w-11/12 md:w-3/4 border border-gray-700">
         <div v-if="started" class="h-full flex flex-wrap items-stretch">
           <div v-for="num in nums" :key="num" class="w-1/4 h-1/4">
-            <button @click="cur = cur == num ? cur + 1 : cur" class="w-full h-full border-2 border-gray-700 bg-gray-400 text-6xl">
+            <button @click="increment(num)" class="w-full h-full border-2 border-gray-700 bg-gray-400 text-6xl">
               {{ num }}
             </button>
           </div>
@@ -34,13 +39,6 @@ export default {
       timer: null
     }
   },
-  watch: {
-    cur () {
-      if (this.cur === 17) {
-        clearTimeout(this.timer)
-      }
-    }
-  },
   created () {
     const nums = []
     for (let i = 1; i <= 16; i++) {
@@ -61,6 +59,14 @@ export default {
       this.timer = setInterval(() => {
         this.time += 1
       }, 10)
+    },
+    increment (num) {
+      if (num === this.cur) {
+        this.cur += 1
+      }
+      if (this.cur === 17) {
+        clearTimeout(this.timer)
+      }
     }
   }
 }
