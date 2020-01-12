@@ -1,25 +1,31 @@
 <template>
   <div id="app">
     <div class="w-screen h-screen bg-blue-200 mx-auto flex flex-col items-center justify-around">
-      <div class="text-4xl">
-        <p v-if="started">
-          Current: <b>{{ cur == 17 ? "DONE" : cur }}</b> - Time {{ (time / 100).toFixed(2) }}s
-        </p>
-        <p v-else>
+      <div class="w-full">
+        <div v-if="started" class="text-5xl w-full flex flex-col sm:flex-row items-center sm:items-start justify-around">
+          <p>Current: <b>{{ cur == 17 ? "DONE" : cur }}</b></p>
+          <p>Time: <b>{{ (time / 100).toFixed(2) }}</b>s</p>
+        </div>
+        <p v-else class="text-6xl text-center">
           Click Sixteen
         </p>
       </div>
       <div class="m-5 flex-1 w-11/12 md:w-3/4 border border-gray-700">
         <div v-if="started" class="h-full flex flex-wrap items-stretch">
           <div v-for="num in nums" :key="num" class="w-1/4 h-1/4">
-            <button @click="increment(num)" class="w-full h-full border-2 border-gray-700 bg-gray-400 text-6xl">
+            <button @click="increment(num)" class="w-full h-full border-2 border-gray-700 bg-gray-300 text-6xl">
               {{ num }}
             </button>
           </div>
         </div>
         <div v-else class="w-full h-full">
-          <button @click="start" class="w-full h-full border border-gray-700 bg-gray-500 text-6xl">
-            START
+          <button @click="start" class="w-full h-full border border-gray-700 bg-gray-400">
+            <p class="text-6xl">
+              START
+            </p>
+            <p class="text-2xl text-gray-700">
+              Click all the numbers from 1 to 16
+            </p>
           </button>
         </div>
       </div>
@@ -29,7 +35,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: 'Game',
   data: () => {
     return {
       nums: [],
@@ -71,7 +77,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
