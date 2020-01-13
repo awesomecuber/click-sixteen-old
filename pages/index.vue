@@ -77,6 +77,7 @@ export default {
         this.started = false
         this.lastTime = this.time
         this.time = 0
+        this.cur = 1
       }
     }
   }
