@@ -3,12 +3,13 @@
     <div class="w-screen h-screen bg-blue-200 mx-auto flex flex-col items-center justify-around">
       <div class="w-full">
         <div v-if="started" class="text-5xl w-full flex flex-col sm:flex-row items-center sm:items-start justify-around">
-          <p>Current: <b>{{ cur == 17 ? "DONE" : cur }}</b></p>
-          <p>Time: <b>{{ (time / 100).toFixed(2) }}</b>s</p>
+          <p>Current: <b>{{ cur === 17 ? "DONE" : cur }}</b></p>
+          <p>Time: <b>{{ (time / 100).toFixed(2) + "s" }}</b></p>
         </div>
-        <p v-else class="text-6xl text-center">
-          Click Sixteen
-        </p>
+        <div v-else class="text-5xl w-full flex flex-col sm:flex-row items-center sm:items-start justify-around">
+          <p>Click Sixteen</p>
+          <p>Last Time: <b>{{ lastTime === 0 ? "N/A" : (lastTime / 100).toFixed(2) + "s" }}</b></p>
+        </div>
       </div>
       <div class="m-5 flex-1 w-11/12 md:w-3/4 border border-gray-700">
         <div v-if="started" class="h-full flex flex-wrap items-stretch">
@@ -42,7 +43,8 @@ export default {
       started: false,
       cur: 1,
       time: 0,
-      timer: null
+      timer: null,
+      lastTime: 0
     }
   },
   created () {
@@ -72,6 +74,9 @@ export default {
       }
       if (this.cur === 17) {
         clearTimeout(this.timer)
+        this.started = false
+        this.lastTime = this.time
+        this.time = 0
       }
     }
   }
