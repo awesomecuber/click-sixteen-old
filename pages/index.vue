@@ -52,12 +52,7 @@ export default {
     for (let i = 1; i <= 16; i++) {
       nums.push(i)
     }
-    for (let i = nums.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      const temp = nums[i]
-      nums[i] = nums[j]
-      nums[j] = temp
-    }
+    this.randomize(nums)
     this.nums = nums
   },
   methods: {
@@ -78,6 +73,15 @@ export default {
         this.lastTime = this.time
         this.time = 0
         this.cur = 1
+        this.randomize(this.nums)
+      }
+    },
+    randomize (arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1))
+        const temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
       }
     }
   }
